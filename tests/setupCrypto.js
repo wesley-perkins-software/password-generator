@@ -3,6 +3,7 @@ const globalObject = globalThis;
 Object.defineProperty(globalObject, "isSecureContext", {
   value: true,
   writable: true,
+  configurable: true,
 });
 
 const deterministicValues = new Uint32Array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]);
@@ -34,7 +35,7 @@ Object.defineProperty(globalObject, "crypto", {
   configurable: true,
 });
 
-if (globalObject.window) {
+if (globalObject.window && globalObject.window !== globalObject) {
   Object.defineProperty(globalObject.window, "isSecureContext", {
     value: true,
     configurable: true,
