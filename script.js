@@ -1,0 +1,133 @@
+(function () {
+  const lengthInput = document.getElementById("length");
+  const lowercaseToggle = document.getElementById("lowercase");
+  const uppercaseToggle = document.getElementById("uppercase");
+  const numbersToggle = document.getElementById("numbers");
+  const symbolsToggle = document.getElementById("symbols");
+  const generateButton = document.getElementById("generate");
+  const copyButton = document.getElementById("copy");
+  const passwordOutput = document.getElementById("password");
+  const status = document.getElementById("status");
+
+  const CHARSETS = {
+    lowercase: "abcdefghijklmnopqrstuvwxyz",
+    uppercase: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+    numbers: "0123456789",
+    symbols: "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~"
+  };
+
+  function getActiveSets() {
+    const sets = [];
+    if (lowercaseToggle.checked) sets.push("lowercase");
+    if (uppercaseToggle.checked) sets.push("uppercase");
+    if (numbersToggle.checked) sets.push("numbers");
+    if (symbolsToggle.checked) sets.push("symbols");
+    return sets;
+  }
+
+  function buildCharacterPool(activeSets) {
+    return activeSets.map((key) => CHARSETS[key]).join("");
+  }
+
+  function getRandomIndex(maxExclusive) {
+    const MAX_UINT32 = 4294967296; // 2^32
+    if (maxExclusive <= 0) return 0;
+    const limit = Math.floor(MAX_UINT32 / maxExclusive) * maxExclusive;
+    const random = new Uint32Array(1);
+    while (true) {
+      crypto.getRandomValues(random);
+      const value = random[0];
+      if (value < limit) {
+        return value % maxExclusive;
+      }
+    }
+  }
+
+  function getRandomCharacter(pool) {
+    const poolLength = pool.length;
+    if (poolLength === 0) return "";
+    const maxValid = Math.floor(256 / poolLength) * poolLength;
+    const randomValues = new Uint8Array(1);
+    while (true) {
+      crypto.getRandomValues(randomValues);
+      const value = randomValues[0];
+      if (value < maxValid) {
+        return pool[value % poolLength];
+      }
+    }
+  }
+
+  function generatePassword() {
+    const length = Number(lengthInput.value);
+    if (!Number.isInteger(length) || length < Number(lengthInput.min) || length > Number(lengthInput.max)) {
+      status.textContent = `Password length must be between ${lengthInput.min} and ${lengthInput.max}.`;
+      passwordOutput.textContent = "";
+      passwordOutput.removeAttribute("data-value");
+      copyButton.disabled = true;
+      return;
+    }
+
+    const activeSets = getActiveSets();
+    if (activeSets.length === 0) {
+      status.textContent = "Select at least one character type.";
+      passwordOutput.textContent = "";
+      passwordOutput.removeAttribute("data-value");
+      copyButton.disabled = true;
+      return;
+    }
+
+    const pool = buildCharacterPool(activeSets);
+    const requiredChars = activeSets.map((setKey) => getRandomCharacter(CHARSETS[setKey]));
+    const remainingLength = Math.max(length - requiredChars.length, 0);
+    const characters = [];
+
+    for (let i = 0; i < remainingLength; i += 1) {
+      characters.push(getRandomCharacter(pool));
+    }
+
+    characters.push(...requiredChars);
+
+    for (let i = characters.length - 1; i > 0; i -= 1) {
+      const randomIndex = getRandomIndex(i + 1);
+      const temp = characters[i];
+      characters[i] = characters[randomIndex];
+      characters[randomIndex] = temp;
+    }
+
+    const password = characters.join("");
+    passwordOutput.textContent = password;
+    passwordOutput.dataset.value = password;
+    copyButton.disabled = false;
+    status.textContent = "Password generated. Use Copy to store it securely.";
+  }
+
+  async function copyPassword() {
+    const value = passwordOutput.dataset.value;
+    if (!value) {
+      status.textContent = "Generate a password before copying.";
+      return;
+    }
+
+    try {
+      await navigator.clipboard.writeText(value);
+      status.textContent = "Password copied to clipboard.";
+    } catch (error) {
+      status.textContent = "Clipboard unavailable. Copy manually.";
+    }
+  }
+
+  function init() {
+    generateButton.addEventListener("click", generatePassword);
+    copyButton.addEventListener("click", copyPassword);
+    document.getElementById("generator-form").addEventListener("submit", (event) => {
+      event.preventDefault();
+      generatePassword();
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init, { once: true });
+  } else {
+    init();
+  }
+})();
