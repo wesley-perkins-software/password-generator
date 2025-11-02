@@ -1,0 +1,17 @@
+{
+  "name": "password-generator",
+  "version": "1.0.0",
+  "description": "A minimal, single-page password generator that runs entirely in the browser. Passwords never leave the device and are generated using the Web Crypto API to avoid bias.",
+  "main": "script.js",
+  "scripts": {
+    "test": "node --test",
+    "test:e2e": "npx playwright test"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@playwright/test": "^1.49.0"
+  }
+}

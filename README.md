@@ -17,6 +17,14 @@ A minimal, single-page password generator that runs entirely in the browser. Pas
    ```
 3. Visit the printed local URL (usually <http://127.0.0.1:8080>) to use the generator.
 
+## Testing
+- `npm test` executes the Node.js unit test suite. The command uses the built-in test runner so it will automatically pick up any
+  files added under a conventional `test` directory.
+- `npm run test:e2e` launches the Playwright end-to-end checks. The suite opens `index.html` directly from disk, stubs the
+  clipboard API, and validates the copy-flow success and failure states without requiring a running web server.
+
+Run `npm install` before either command to ensure all dependencies are available locally.
+
 ## Deploying
 
 ### GitHub Pages
