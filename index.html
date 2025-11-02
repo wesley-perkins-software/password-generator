@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Secure Password Generator | Create Strong Passwords Instantly</title>
+  <meta name="description" content="Generate strong, random passwords instantly in your browser using a secure client-side generator with zero logging.">
+  <meta property="og:title" content="Secure Password Generator" />
+  <meta property="og:description" content="Create strong passwords instantly without sending data anywhere." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://example.com/" />
+  <link rel="canonical" href="https://example.com/" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1>Secure Password Generator</h1>
+      <p class="tagline">Create a unique password locally — nothing leaves your browser.</p>
+    </div>
+  </header>
+
+  <main class="container" id="main-content">
+    <section class="generator" aria-labelledby="generator-title">
+      <h2 id="generator-title">Generate a password</h2>
+      <form id="generator-form" novalidate>
+        <div class="field">
+          <label for="length">Password length</label>
+          <input type="number" id="length" name="length" min="8" max="128" value="20" inputmode="numeric" />
+        </div>
+        <fieldset class="field options">
+          <legend>Include characters</legend>
+          <label class="option">
+            <input type="checkbox" id="lowercase" name="lowercase" checked />
+            <span>Lowercase (a-z)</span>
+          </label>
+          <label class="option">
+            <input type="checkbox" id="uppercase" name="uppercase" checked />
+            <span>Uppercase (A-Z)</span>
+          </label>
+          <label class="option">
+            <input type="checkbox" id="numbers" name="numbers" checked />
+            <span>Numbers (0-9)</span>
+          </label>
+          <label class="option">
+            <input type="checkbox" id="symbols" name="symbols" />
+            <span>Symbols (!@#…)</span>
+          </label>
+        </fieldset>
+        <div class="actions">
+          <button type="button" id="generate">Generate</button>
+          <button type="button" id="copy" disabled>Copy</button>
+        </div>
+      </form>
+      <div class="output" aria-live="polite" aria-atomic="true">
+        <output id="password" for="generator-form" tabindex="0" aria-label="Generated password"></output>
+      </div>
+      <p class="status" aria-live="assertive" aria-atomic="true" id="status" role="status"></p>
+    </section>
+
+    <aside class="ad-wrapper" aria-label="Sponsored">
+      <h2 class="visually-hidden">Sponsored content</h2>
+      <div class="ad-slot ad-slot--leaderboard" role="complementary" aria-label="Advertisement">
+        <!-- Google AdSense script tag goes here when enabled -->
+        <!-- Example: <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=YOUR_CLIENT_ID" crossorigin="anonymous"></script> -->
+        <!-- Google-certified CMP hook: insert CMP script with required domain permissions here -->
+        <div class="ad-placeholder" aria-hidden="true">Advertisement</div>
+      </div>
+      <div class="ad-slot ad-slot--rectangle" role="complementary" aria-label="Advertisement">
+        <div class="ad-placeholder" aria-hidden="true">Advertisement</div>
+      </div>
+      <!-- To reuse this layout server-side, include the markup from ads.html -->
+    </aside>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>Passwords are generated locally using the Web Crypto API. Remember to store them securely.</p>
+    </div>
+  </footer>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
