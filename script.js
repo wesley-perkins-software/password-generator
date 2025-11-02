@@ -8,6 +8,7 @@
   const copyButton = document.getElementById("copy");
   const passwordOutput = document.getElementById("password");
   const status = document.getElementById("status");
+  const supportsWebCrypto = Boolean(window.isSecureContext && window.crypto?.getRandomValues);
 
   const CHARSETS = {
     lowercase: "abcdefghijklmnopqrstuvwxyz",
@@ -33,9 +34,13 @@
     const MAX_UINT32 = 4294967296; // 2^32
     if (maxExclusive <= 0) return 0;
     const limit = Math.floor(MAX_UINT32 / maxExclusive) * maxExclusive;
+    if (!supportsWebCrypto) {
+      throw new Error("Web Crypto API unavailable");
+    }
+
     const random = new Uint32Array(1);
     while (true) {
-      crypto.getRandomValues(random);
+      window.crypto.getRandomValues(random);
       const value = random[0];
       if (value < limit) {
         return value % maxExclusive;
@@ -47,9 +52,13 @@
     const poolLength = pool.length;
     if (poolLength === 0) return "";
     const maxValid = Math.floor(256 / poolLength) * poolLength;
+    if (!supportsWebCrypto) {
+      throw new Error("Web Crypto API unavailable");
+    }
+
     const randomValues = new Uint8Array(1);
     while (true) {
-      crypto.getRandomValues(randomValues);
+      window.crypto.getRandomValues(randomValues);
       const value = randomValues[0];
       if (value < maxValid) {
         return pool[value % poolLength];
@@ -117,6 +126,19 @@
   }
 
   function init() {
+    if (!supportsWebCrypto) {
+      lengthInput.disabled = true;
+      lowercaseToggle.disabled = true;
+      uppercaseToggle.disabled = true;
+      numbersToggle.disabled = true;
+      symbolsToggle.disabled = true;
+      generateButton.disabled = true;
+      copyButton.disabled = true;
+      status.textContent =
+        "Secure password generation requires HTTPS and a modern browser with Web Crypto support. Try loading this page over HTTPS or updating your browser.";
+      return;
+    }
+
     generateButton.addEventListener("click", generatePassword);
     copyButton.addEventListener("click", copyPassword);
     document.getElementById("generator-form").addEventListener("submit", (event) => {
