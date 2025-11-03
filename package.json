@@ -5,13 +5,11 @@
   "main": "script.js",
   "scripts": {
     "test": "node --test",
-    "test:e2e": "npx playwright test"
+    "test:e2e": "node --test e2e/clipboard.test.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
-  "devDependencies": {
-    "@playwright/test": "^1.49.0"
-  }
+  "devDependencies": {}
 }

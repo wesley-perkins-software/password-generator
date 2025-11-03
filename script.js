@@ -1,14 +1,31 @@
-(function () {
-  const lengthInput = document.getElementById("length");
-  const lowercaseToggle = document.getElementById("lowercase");
-  const uppercaseToggle = document.getElementById("uppercase");
-  const numbersToggle = document.getElementById("numbers");
-  const symbolsToggle = document.getElementById("symbols");
-  const generateButton = document.getElementById("generate");
-  const copyButton = document.getElementById("copy");
-  const passwordOutput = document.getElementById("password");
-  const status = document.getElementById("status");
-  const supportsWebCrypto = Boolean(window.isSecureContext && window.crypto?.getRandomValues);
+(function (factory) {
+  if (typeof module !== "undefined" && module.exports) {
+    module.exports = factory;
+  } else {
+    const generator = factory(window);
+    const { document } = window;
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", generator.init, { once: true });
+    } else {
+      generator.init();
+    }
+  }
+})(function createPasswordGenerator(global) {
+  const document = global.document;
+  const navigator = global.navigator;
+
+  const elements = {
+    lengthInput: document.getElementById("length"),
+    lowercaseToggle: document.getElementById("lowercase"),
+    uppercaseToggle: document.getElementById("uppercase"),
+    numbersToggle: document.getElementById("numbers"),
+    symbolsToggle: document.getElementById("symbols"),
+    generateButton: document.getElementById("generate"),
+    copyButton: document.getElementById("copy"),
+    passwordOutput: document.getElementById("password"),
+    status: document.getElementById("status"),
+    form: document.getElementById("generator-form")
+  };
 
   const CHARSETS = {
     lowercase: "abcdefghijklmnopqrstuvwxyz",
@@ -17,13 +34,23 @@
     symbols: "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~"
   };
 
+  function supportsWebCrypto() {
+    return Boolean(global.isSecureContext && global.crypto?.getRandomValues);
+  }
+
+  function ensureWebCrypto() {
+    if (!supportsWebCrypto()) {
+      throw new Error("Web Crypto API unavailable");
+    }
+  }
+
   function getActiveSets() {
-    const sets = [];
-    if (lowercaseToggle.checked) sets.push("lowercase");
-    if (uppercaseToggle.checked) sets.push("uppercase");
-    if (numbersToggle.checked) sets.push("numbers");
-    if (symbolsToggle.checked) sets.push("symbols");
-    return sets;
+    const active = [];
+    if (elements.lowercaseToggle.checked) active.push("lowercase");
+    if (elements.uppercaseToggle.checked) active.push("uppercase");
+    if (elements.numbersToggle.checked) active.push("numbers");
+    if (elements.symbolsToggle.checked) active.push("symbols");
+    return active;
   }
 
   function buildCharacterPool(activeSets) {
@@ -31,16 +58,13 @@
   }
 
   function getRandomIndex(maxExclusive) {
-    const MAX_UINT32 = 4294967296; // 2^32
     if (maxExclusive <= 0) return 0;
+    ensureWebCrypto();
+    const MAX_UINT32 = 4294967296;
     const limit = Math.floor(MAX_UINT32 / maxExclusive) * maxExclusive;
-    if (!supportsWebCrypto) {
-      throw new Error("Web Crypto API unavailable");
-    }
-
     const random = new Uint32Array(1);
     while (true) {
-      window.crypto.getRandomValues(random);
+      global.crypto.getRandomValues(random);
       const value = random[0];
       if (value < limit) {
         return value % maxExclusive;
@@ -51,14 +75,11 @@
   function getRandomCharacter(pool) {
     const poolLength = pool.length;
     if (poolLength === 0) return "";
+    ensureWebCrypto();
     const maxValid = Math.floor(256 / poolLength) * poolLength;
-    if (!supportsWebCrypto) {
-      throw new Error("Web Crypto API unavailable");
-    }
-
     const randomValues = new Uint8Array(1);
     while (true) {
-      window.crypto.getRandomValues(randomValues);
+      global.crypto.getRandomValues(randomValues);
       const value = randomValues[0];
       if (value < maxValid) {
         return pool[value % poolLength];
@@ -66,22 +87,36 @@
     }
   }
 
+  function setStatus(message) {
+    elements.status.textContent = message;
+  }
+
+  function clearPassword() {
+    elements.passwordOutput.textContent = "";
+    if (typeof elements.passwordOutput.removeAttribute === "function") {
+      elements.passwordOutput.removeAttribute("data-value");
+    } else {
+      delete elements.passwordOutput.dataset?.value;
+    }
+    elements.copyButton.disabled = true;
+  }
+
   function generatePassword() {
-    const length = Number(lengthInput.value);
-    if (!Number.isInteger(length) || length < Number(lengthInput.min) || length > Number(lengthInput.max)) {
-      status.textContent = `Password length must be between ${lengthInput.min} and ${lengthInput.max}.`;
-      passwordOutput.textContent = "";
-      passwordOutput.removeAttribute("data-value");
-      copyButton.disabled = true;
+    const length = Number(elements.lengthInput.value);
+    if (
+      !Number.isInteger(length) ||
+      length < Number(elements.lengthInput.min) ||
+      length > Number(elements.lengthInput.max)
+    ) {
+      setStatus(`Password length must be between ${elements.lengthInput.min} and ${elements.lengthInput.max}.`);
+      clearPassword();
       return;
     }
 
     const activeSets = getActiveSets();
     if (activeSets.length === 0) {
-      status.textContent = "Select at least one character type.";
-      passwordOutput.textContent = "";
-      passwordOutput.removeAttribute("data-value");
-      copyButton.disabled = true;
+      setStatus("Select at least one character type.");
+      clearPassword();
       return;
     }
 
@@ -104,52 +139,61 @@
     }
 
     const password = characters.join("");
-    passwordOutput.textContent = password;
-    passwordOutput.dataset.value = password;
-    copyButton.disabled = false;
-    status.textContent = "Password generated. Use Copy to store it securely.";
+    elements.passwordOutput.textContent = password;
+    elements.passwordOutput.dataset.value = password;
+    elements.copyButton.disabled = false;
+    setStatus("Password generated. Use Copy to store it securely.");
   }
 
   async function copyPassword() {
-    const value = passwordOutput.dataset.value;
+    const value = elements.passwordOutput.dataset.value;
     if (!value) {
-      status.textContent = "Generate a password before copying.";
+      setStatus("Generate a password before copying.");
       return;
     }
 
     try {
       await navigator.clipboard.writeText(value);
-      status.textContent = "Password copied to clipboard.";
+      setStatus("Password copied to clipboard.");
     } catch (error) {
-      status.textContent = "Clipboard unavailable. Copy manually.";
+      setStatus("Clipboard unavailable. Copy manually.");
     }
   }
 
+  function disableControls() {
+    elements.lengthInput.disabled = true;
+    elements.lowercaseToggle.disabled = true;
+    elements.uppercaseToggle.disabled = true;
+    elements.numbersToggle.disabled = true;
+    elements.symbolsToggle.disabled = true;
+    elements.generateButton.disabled = true;
+    elements.copyButton.disabled = true;
+  }
+
   function init() {
-    if (!supportsWebCrypto) {
-      lengthInput.disabled = true;
-      lowercaseToggle.disabled = true;
-      uppercaseToggle.disabled = true;
-      numbersToggle.disabled = true;
-      symbolsToggle.disabled = true;
-      generateButton.disabled = true;
-      copyButton.disabled = true;
-      status.textContent =
-        "Secure password generation requires HTTPS and a modern browser with Web Crypto support. Try loading this page over HTTPS or updating your browser.";
+    if (!supportsWebCrypto()) {
+      disableControls();
+      setStatus(
+        "Secure password generation requires HTTPS and a modern browser with Web Crypto support. Try loading this page over HTTPS or updating your browser."
+      );
       return;
     }
 
-    generateButton.addEventListener("click", generatePassword);
-    copyButton.addEventListener("click", copyPassword);
-    document.getElementById("generator-form").addEventListener("submit", (event) => {
+    elements.generateButton.addEventListener("click", generatePassword);
+    elements.copyButton.addEventListener("click", copyPassword);
+    elements.form.addEventListener("submit", (event) => {
       event.preventDefault();
       generatePassword();
     });
   }
 
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", init, { once: true });
-  } else {
-    init();
-  }
-})();
+  return {
+    init,
+    generatePassword,
+    copyPassword,
+    getActiveSets,
+    buildCharacterPool,
+    supportsWebCrypto,
+    elements
+  };
+});
