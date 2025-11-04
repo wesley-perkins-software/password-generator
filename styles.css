@@ -26,9 +26,9 @@ body {
 }
 
 .container {
-  width: min(960px, 92vw);
+  width: min(960px, calc(100% - 2rem));
   margin: 0 auto;
-  padding: 1.5rem 0;
+  padding: clamp(1.25rem, 3vw, 2rem) clamp(1rem, 5vw, 3rem);
 }
 
 .site-header, .site-footer {
