@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Secure Password Generator | Create Strong Passwords Instantly</title>
   <meta name="description" content="Generate strong, random passwords instantly in your browser using a secure client-side generator with zero logging.">
+  <meta name="referrer" content="no-referrer">
   <meta property="og:title" content="Secure Password Generator" />
   <meta property="og:description" content="Create strong passwords instantly without sending data anywhere." />
   <meta property="og:type" content="website" />
@@ -13,6 +14,13 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+  <noscript>
+    <style>.generator{display:none}</style>
+    <div class="container" role="status">
+      This tool requires JavaScript (no data is ever sent to a server).
+    </div>
+  </noscript>
+
   <header class="site-header">
     <div class="container">
       <h1>Secure Password Generator</h1>
@@ -26,7 +34,16 @@
       <form id="generator-form" novalidate>
         <div class="field">
           <label for="length">Password length</label>
-          <input type="number" id="length" name="length" min="8" max="128" value="20" inputmode="numeric" />
+          <input
+            type="number"
+            id="length"
+            name="length"
+            min="8"
+            max="128"
+            value="20"
+            inputmode="numeric"
+            autocomplete="off"
+          />
         </div>
         <fieldset class="field options">
           <legend>Include characters</legend>
