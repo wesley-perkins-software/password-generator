@@ -115,6 +115,11 @@ input[type="number"]:focus {
   border-color: var(--accent);
 }
 
+input[type="range"] {
+  width: 100%;
+  accent-color: var(--accent);
+}
+
 fieldset.options {
   border: 1px solid color-mix(in srgb, var(--accent) 10%, transparent);
   border-radius: 1rem;

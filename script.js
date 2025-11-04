@@ -1,5 +1,6 @@
 (function () {
   const lengthInput = document.getElementById("length");
+  const lengthSlider = document.getElementById("length-slider");
   const lowercaseToggle = document.getElementById("lowercase");
   const uppercaseToggle = document.getElementById("uppercase");
   const numbersToggle = document.getElementById("numbers");
@@ -128,6 +129,7 @@
   function init() {
     if (!supportsWebCrypto) {
       lengthInput.disabled = true;
+      if (lengthSlider) lengthSlider.disabled = true;
       lowercaseToggle.disabled = true;
       uppercaseToggle.disabled = true;
       numbersToggle.disabled = true;
@@ -141,6 +143,25 @@
 
     generateButton.addEventListener("click", generatePassword);
     copyButton.addEventListener("click", copyPassword);
+
+    if (lengthSlider) {
+      lengthSlider.value = lengthInput.value;
+
+      lengthSlider.addEventListener("input", () => {
+        lengthInput.value = lengthSlider.value;
+      });
+
+      lengthInput.addEventListener("input", () => {
+        const value = Number(lengthInput.value);
+        const min = Number(lengthInput.min);
+        const max = Number(lengthInput.max);
+        if (!Number.isNaN(value)) {
+          const clamped = Math.min(Math.max(value, min), max);
+          lengthSlider.value = String(clamped);
+        }
+      });
+    }
+
     document.getElementById("generator-form").addEventListener("submit", (event) => {
       event.preventDefault();
       generatePassword();
