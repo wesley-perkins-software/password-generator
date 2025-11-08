@@ -9,7 +9,21 @@
   const copyButton = document.getElementById("copy");
   const passwordOutput = document.getElementById("password");
   const status = document.getElementById("status");
-  const supportsWebCrypto = Boolean(window.isSecureContext && window.crypto?.getRandomValues);
+  function hasSecureRandomSupport() {
+    if (!window.crypto?.getRandomValues) {
+      return false;
+    }
+
+    try {
+      const probe = new Uint8Array(1);
+      window.crypto.getRandomValues(probe);
+      return true;
+    } catch (error) {
+      return false;
+    }
+  }
+
+  const supportsWebCrypto = hasSecureRandomSupport();
 
   const CHARSETS = {
     lowercase: "abcdefghijklmnopqrstuvwxyz",
@@ -137,7 +151,7 @@
       generateButton.disabled = true;
       copyButton.disabled = true;
       status.textContent =
-        "Secure password generation requires HTTPS and a modern browser with Web Crypto support. Try loading this page over HTTPS or updating your browser.";
+        "Secure password generation requires HTTPS (or localhost) and a modern browser with Web Crypto support. On mobile, open the HTTPS version of this page or update your browser.";
       return;
     }
 
