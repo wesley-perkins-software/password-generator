@@ -1,0 +1,3 @@
+# SSL/TLS keys - NEVER commit
+cert.pem
+key.pem
