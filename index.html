@@ -84,17 +84,32 @@
       <p class="status" aria-live="assertive" aria-atomic="true" id="status" role="status"></p>
     </section>
 
-    <aside class="ad-wrapper" aria-label="Sponsored">
-      <h2 class="visually-hidden">Sponsored content</h2>
-      <div class="ad-slot ad-slot--leaderboard" role="complementary" aria-label="Advertisement">
-        <!-- Google AdSense script tag goes here when enabled -->
-        <!-- Example: <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=YOUR_CLIENT_ID" crossorigin="anonymous"></script> -->
-        <!-- Google-certified CMP hook: insert CMP script with required domain permissions here -->
-        <div class="ad-placeholder" aria-hidden="true">Advertisement</div>
-      </div>
-      <div class="ad-slot ad-slot--rectangle" role="complementary" aria-label="Advertisement">
-        <div class="ad-placeholder" aria-hidden="true">Advertisement</div>
-      </div>
+    <aside class="tips-panel" aria-labelledby="tips-heading">
+      <h2 id="tips-heading">Password security tips</h2>
+      <article class="tip-card">
+        <h3>Start with length</h3>
+        <p>Use at least 16 characters and keep every character type enabled for maximum randomness.</p>
+        <ul class="tip-list">
+          <li>Increase length further for critical accounts (20+ characters).</li>
+          <li>Avoid predictable phrases or keyboard patterns.</li>
+        </ul>
+      </article>
+      <article class="tip-card">
+        <h3>Keep it unique</h3>
+        <p>Every site should get its own password so a single breach cannot unlock other accounts.</p>
+        <ul class="tip-list">
+          <li>Let a reputable password manager store and fill the credentials.</li>
+          <li>Add MFA wherever offered for an extra layer of defense.</li>
+        </ul>
+      </article>
+      <article class="tip-card">
+        <h3>Refresh safely</h3>
+        <p>Rotate passwords for sensitive services, especially after a security alert or device loss.</p>
+        <ul class="tip-list">
+          <li>Revoke access for old sessions when you update credentials.</li>
+          <li>Back up recovery codes offline in case you lose a device.</li>
+        </ul>
+      </article>
       <!-- To reuse this layout server-side, include the markup from ads.html -->
     </aside>
   </main>
