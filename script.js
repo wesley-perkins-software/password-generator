@@ -125,6 +125,38 @@
     status.textContent = "Password generated. Use Copy to store it securely.";
   }
 
+  function fallbackCopy(value) {
+    const textarea = document.createElement("textarea");
+    textarea.value = value;
+    textarea.setAttribute("readonly", "true");
+    textarea.style.position = "absolute";
+    textarea.style.left = "-9999px";
+    textarea.style.fontSize = "16px";
+
+    const selection = document.getSelection();
+    const selectedRange = selection && selection.rangeCount > 0 ? selection.getRangeAt(0) : null;
+
+    document.body.appendChild(textarea);
+    textarea.select();
+    textarea.setSelectionRange(0, textarea.value.length);
+
+    let successful = false;
+    try {
+      successful = document.execCommand("copy");
+    } catch (error) {
+      successful = false;
+    }
+
+    document.body.removeChild(textarea);
+
+    if (selectedRange && selection) {
+      selection.removeAllRanges();
+      selection.addRange(selectedRange);
+    }
+
+    return successful;
+  }
+
   async function copyPassword() {
     const value = passwordOutput.dataset.value;
     if (!value) {
@@ -132,12 +164,24 @@
       return;
     }
 
-    try {
-      await navigator.clipboard.writeText(value);
-      status.textContent = "Password copied to clipboard.";
-    } catch (error) {
-      status.textContent = "Clipboard unavailable. Copy manually.";
+    let copied = false;
+
+    if (navigator.clipboard?.writeText) {
+      try {
+        await navigator.clipboard.writeText(value);
+        copied = true;
+      } catch (error) {
+        copied = false;
+      }
     }
+
+    if (!copied) {
+      copied = fallbackCopy(value);
+    }
+
+    status.textContent = copied
+      ? "Password copied to clipboard."
+      : "Clipboard unavailable. Copy manually.";
   }
 
   function init() {
