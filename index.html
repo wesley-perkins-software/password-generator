@@ -1,21 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Secure Password Generator | Create Strong Passwords Instantly</title>
   <meta name="description" content="Generate strong, random passwords instantly in your browser using a secure client-side generator with zero logging.">
   <meta name="referrer" content="no-referrer">
-  <meta property="og:title" content="Secure Password Generator" />
-  <meta property="og:description" content="Create strong passwords instantly without sending data anywhere." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://example.com/" />
-  <link rel="canonical" href="https://example.com/" />
-  <link rel="stylesheet" href="styles.css" />
-</head>
-<body>
+  <meta property="og:title" content="Secure Password Generator">
+  <meta property="og:description" content="Create strong passwords instantly without sending data anywhere.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://example.com/">
+  <link rel="canonical" href="https://example.com/">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+
+
+  <!-- Valid placement for noscript <style> -->
   <noscript>
-    <style>.generator{display:none}</style>
+    <style>
+      .generator { display: none; }
+    </style>
+  </noscript>
+</head>
+
+<body>
+
+  <!-- This noscript now contains only allowed content -->
+  <noscript>
     <div class="container" role="status">
       This tool requires JavaScript (no data is ever sent to a server).
     </div>
@@ -31,6 +42,7 @@
   <main class="container" id="main-content">
     <section class="generator" aria-labelledby="generator-title">
       <h2 id="generator-title">Generate a password</h2>
+
       <form id="generator-form" novalidate>
         <div class="field">
           <label for="length">Password length</label>
@@ -42,8 +54,8 @@
             max="128"
             value="20"
             inputmode="numeric"
-            autocomplete="off"
-          />
+            autocomplete="off">
+          
           <label class="visually-hidden" for="length-slider">Password length slider</label>
           <input
             type="range"
@@ -51,41 +63,49 @@
             name="length-slider"
             min="16"
             max="128"
-            value="20"
-          />
+            value="20">
         </div>
+
         <fieldset class="field options">
           <legend>Include characters</legend>
+
           <label class="option">
-            <input type="checkbox" id="lowercase" name="lowercase" checked />
+            <input type="checkbox" id="lowercase" name="lowercase" checked>
             <span>Lowercase (a-z)</span>
           </label>
+
           <label class="option">
-            <input type="checkbox" id="uppercase" name="uppercase" checked />
+            <input type="checkbox" id="uppercase" name="uppercase" checked>
             <span>Uppercase (A-Z)</span>
           </label>
+
           <label class="option">
-            <input type="checkbox" id="numbers" name="numbers" checked />
+            <input type="checkbox" id="numbers" name="numbers" checked>
             <span>Numbers (0-9)</span>
           </label>
+
           <label class="option">
-            <input type="checkbox" id="symbols" name="symbols" checked />
+            <input type="checkbox" id="symbols" name="symbols" checked>
             <span>Symbols (!@#…)</span>
           </label>
         </fieldset>
+
         <div class="actions">
           <button type="button" id="generate">Generate</button>
           <button type="button" id="copy" disabled>Copy</button>
         </div>
       </form>
+
       <div class="output" aria-live="polite" aria-atomic="true">
         <output id="password" for="generator-form" tabindex="0" aria-label="Generated password"></output>
       </div>
+
       <p class="status" aria-live="assertive" aria-atomic="true" id="status" role="status"></p>
     </section>
 
     <aside class="tips-panel" aria-labelledby="tips-heading">
       <h2 id="tips-heading">Password security tips</h2>
+
       <article class="tip-card">
         <h3>Start with length</h3>
         <p>Use at least 16 characters and keep every character type enabled for maximum randomness.</p>
@@ -94,6 +114,7 @@
           <li>Avoid predictable phrases or keyboard patterns.</li>
         </ul>
       </article>
+
       <article class="tip-card">
         <h3>Keep it unique</h3>
         <p>Every site should get its own password so a single breach cannot unlock other accounts.</p>
@@ -102,6 +123,7 @@
           <li>Add MFA wherever offered for an extra layer of defense.</li>
         </ul>
       </article>
+
       <article class="tip-card">
         <h3>Refresh safely</h3>
         <p>Rotate passwords for sensitive services, especially after a security alert or device loss.</p>
@@ -110,13 +132,14 @@
           <li>Back up recovery codes offline in case you lose a device.</li>
         </ul>
       </article>
-      <!-- To reuse this layout server-side, include the markup from ads.html -->
+
     </aside>
   </main>
 
   <footer class="site-footer">
     <div class="container">
       <p>Passwords are generated locally using the Web Crypto API. Remember to store them securely.</p>
+
       <nav aria-label="Legal">
         <ul class="footer-links">
           <li><a href="/privacy.html">Privacy Notice</a></li>
