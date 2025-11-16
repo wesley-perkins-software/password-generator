@@ -222,31 +222,47 @@ output#password {
   border: 0;
 }
 
-.ad-wrapper { display: grid; gap: 1.5rem; }
+.tips-panel {
+  display: grid;
+  gap: 1.25rem;
+  align-content: start;
+}
 
-.ad-slot {
+.tips-panel > h2 {
+  margin: 0;
+  font-size: 1.05rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+}
+
+.tip-card {
   background: var(--surface);
   border-radius: 1rem;
   border: 1px solid color-mix(in srgb, var(--accent) 8%, transparent);
-  min-height: 120px;
+  padding: 1.35rem;
+  box-shadow: 0 16px 35px rgba(31, 38, 64, 0.08);
   display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  position: relative;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
-.ad-slot--leaderboard { min-height: 90px; height: 90px; }
-.ad-slot--rectangle  { min-height: 250px; height: 250px; }
+.tip-card h3 {
+  margin: 0;
+  font-size: 1.15rem;
+}
 
-.ad-placeholder {
+.tip-card p {
+  margin: 0;
   color: var(--muted);
-  font-size: 0.85rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  background: linear-gradient(120deg, color-mix(in srgb, var(--accent) 10%, transparent), transparent);
-  padding: 0.5rem 1rem;
-  border-radius: 999px;
+}
+
+.tip-list {
+  margin: 0;
+  padding-left: 1.1rem;
+  display: grid;
+  gap: 0.4rem;
+  color: var(--fg);
 }
 
 @media (prefers-color-scheme: dark) {
