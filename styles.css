@@ -94,6 +94,8 @@ main.container {
   border: 1px solid color-mix(in srgb, var(--accent) 10%, transparent);
 }
 
+.generator { padding-top: 0.25rem; }
+
 .field {
   display: grid;
   gap: 0.5rem;
