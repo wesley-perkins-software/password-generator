@@ -26,7 +26,7 @@ body {
 .container {
   width: min(960px, 92vw);
   margin: 0 auto;
-  padding: 1.25rem 0;
+  padding: 1.1rem 0;
 }
 
 /* Fallback borders for older browsers (before color-mix rules) */
@@ -66,7 +66,7 @@ body {
 }
 
 .site-header .container {
-  padding: 0.75rem 0 0.5rem;
+  padding: 0.55rem 0 0.35rem;
 }
 
 .site-header h1 {
@@ -84,7 +84,7 @@ main.container {
   display: grid;
   gap: 2rem;
   grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
-  padding-top: 0.75rem;
+  padding-top: 0.25rem;
 }
 
 @media (max-width: 800px) {
@@ -94,9 +94,14 @@ main.container {
 .generator {
   background: var(--surface);
   border-radius: 1.25rem;
-  padding: clamp(1.5rem, 3.5vw, 2.25rem);
+  padding: clamp(1.25rem, 3vw, 2rem);
   box-shadow: 0 18px 45px rgba(31, 38, 64, 0.12);
   border: 1px solid color-mix(in srgb, var(--accent) 10%, transparent);
+}
+
+.generator h2 {
+  margin: 0 0 1.1rem;
+  font-size: clamp(1.35rem, 3vw, 1.65rem);
 }
 
 .field {
