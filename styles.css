@@ -185,8 +185,8 @@ button:not([disabled]):focus-visible {
 button:not([disabled]):active { transform: scale(0.98); }
 
 .output {
-  background: var(--surface);
-  color: var(--fg);
+  background: #1f2640;
+  color: #f8f9ff;
   border-radius: 0.75rem;
   padding: 1rem;
   min-height: 3.5rem;
@@ -194,7 +194,6 @@ button:not([disabled]):active { transform: scale(0.98); }
   align-items: center;
   justify-content: space-between;
   word-break: break-all;
-  border: 1px solid color-mix(in srgb, var(--accent) 10%, transparent);
 }
 
 .output:focus-within {
