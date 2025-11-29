@@ -1,5 +1,5 @@
 :root {
-  color-scheme: light dark;
+  color-scheme: light;
   --bg: #f6f3ec;
   --bg-highlight: #eef2ff;
   --surface: #ffffff;
@@ -267,25 +267,3 @@ output#password {
   color: var(--fg);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #0f172a;
-    --bg-highlight: #10142d;
-    --surface: rgba(15, 23, 42, 0.78);
-    --fg: #e2e8f0;
-    --accent: #8da2ff;
-    --accent-soft: rgba(141, 162, 255, 0.35);
-    --accent-contrast: #040712;
-    --muted: #94a3b8;
-  }
-
-  .site-header,
-  .site-footer {
-    border-color: rgba(141, 162, 255, 0.25);
-  }
-
-  .output {
-    background: rgba(4, 7, 18, 0.9);
-    color: #f8faff;
-  }
-}
