@@ -3,16 +3,29 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Secure Password Generator | Create Strong Passwords Instantly</title>
-  <meta name="description" content="Generate strong, random passwords instantly in your browser using a secure client-side generator with zero logging.">
+  <title>Secure Random Password Generator | {{SITE_DOMAIN}}</title>
+  <meta name="description" content="Secure random password generator that runs in your browser, never stores passwords, and helps you create strong credentials instantly.">
   <meta name="referrer" content="no-referrer">
   <meta property="og:title" content="Secure Password Generator">
   <meta property="og:description" content="Create strong passwords instantly without sending data anywhere.">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://example.com/">
-  <link rel="canonical" href="https://example.com/">
+  <meta property="og:url" content="https://{{SITE_DOMAIN}}/">
+  <link rel="canonical" href="https://{{SITE_DOMAIN}}/">
   <link rel="stylesheet" href="styles.css">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Secure Password Generator",
+    "url": "https://{{SITE_DOMAIN}}",
+    "applicationCategory": "SecurityApplication",
+    "operatingSystem": "All",
+    "description": "A simple and secure random password generator that never stores your passwords.",
+    "browserRequirements": "Requires JavaScript"
+  }
+  </script>
 
 
   <!-- Valid placement for noscript <style> -->
@@ -34,7 +47,7 @@
 
   <header class="site-header">
     <div class="container">
-      <h1>Secure Password Generator</h1>
+      <h1>Secure Random Password Generator</h1>
       <p class="tagline">Generated locally in your browser. Never stored or transmitted.</p>
     </div>
   </header>
@@ -142,9 +155,9 @@
 
       <nav aria-label="Legal">
         <ul class="footer-links">
-          <li><a href="/privacy.html">Privacy Notice</a></li>
-          <li><a href="/terms.html">Terms of Service</a></li>
-          <li><a href="#" data-cmp-link>Privacy &amp; cookie settings</a></li>
+          <li><a href="/privacy">Privacy Policy</a></li>
+          <li><a href="/terms">Terms of Service</a></li>
+          <li><a href="/cookies">Cookie &amp; privacy settings</a></li>
         </ul>
       </nav>
     </div>
