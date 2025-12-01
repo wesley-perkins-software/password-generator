@@ -1,20 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Secure Random Password Generator | Create Strong Random Passwords</title>
-    <meta name="description" content="Secure random password generator that runs in your browser, never stores passwords, and helps you create strong credentials instantly.">
-    <meta name="referrer" content="no-referrer">
-    <meta property="og:title" content="Secure Password Generator">
-    <meta property="og:description" content="Create strong passwords instantly without sending data anywhere.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://secure-password-generator.com/">
-    <link rel="canonical" href="https://secure-password-generator.com/">
-    <link rel="stylesheet" href="styles.css">
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-  
-    <script type="application/ld+json">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Secure Random Password Generator | Create Strong Random Passwords</title>
+  <meta name="description"
+    content="Secure random password generator that runs in your browser, never stores passwords, and helps you create strong credentials instantly.">
+  <meta name="referrer" content="no-referrer">
+  <meta property="og:title" content="Secure Password Generator">
+  <meta property="og:description" content="Create strong passwords instantly without sending data anywhere.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://secure-password-generator.com/">
+  <link rel="canonical" href="https://secure-password-generator.com/">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+
+  <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "WebApplication",
@@ -26,14 +28,26 @@
       "browserRequirements": "Requires JavaScript"
     }
     </script>
-  
-    <!-- Valid placement for noscript <style> -->
-    <noscript>
-      <style>
-        .generator { display: none; }
-      </style>
-    </noscript>
-  </head>
+
+  <!-- Valid placement for noscript <style> -->
+  <noscript>
+    <style>
+      .generator {
+        display: none;
+      }
+    </style>
+  </noscript>
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4TCEFRK1FQ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-4TCEFRK1FQ');
+  </script>
+
+</head>
 
 <body>
 
@@ -58,24 +72,11 @@
       <form id="generator-form" novalidate>
         <div class="field">
           <label for="length">Password length</label>
-          <input
-            type="number"
-            id="length"
-            name="length"
-            min="16"
-            max="128"
-            value="20"
-            inputmode="numeric"
+          <input type="number" id="length" name="length" min="16" max="128" value="20" inputmode="numeric"
             autocomplete="off">
-          
+
           <label class="visually-hidden" for="length-slider">Password length slider</label>
-          <input
-            type="range"
-            id="length-slider"
-            name="length-slider"
-            min="16"
-            max="128"
-            value="20">
+          <input type="range" id="length-slider" name="length-slider" min="16" max="128" value="20">
         </div>
 
         <fieldset class="field options">
@@ -164,4 +165,5 @@
 
   <script src="script.js" defer></script>
 </body>
+
 </html>
