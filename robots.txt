@@ -1,3 +1,4 @@
 User-agent: *
 Allow: /
-Sitemap: https://{{SITE_DOMAIN}}/sitemap.xml
+
+Sitemap: https://secure-password-generator.com/sitemap.xml
