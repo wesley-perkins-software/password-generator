@@ -267,3 +267,53 @@ output#password {
   color: var(--fg);
 }
 
+.how-it-works {
+  background: color-mix(in srgb, var(--surface) 85%, transparent);
+  border-top: 1px solid color-mix(in srgb, var(--accent) 10%, transparent);
+}
+
+.how-it-works h2 {
+  margin: 0 0 1rem;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+}
+
+.steps {
+  display: grid;
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+@media (min-width: 720px) {
+  .steps { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+.step {
+  background: var(--surface);
+  border-radius: 1rem;
+  border: 1px solid color-mix(in srgb, var(--accent) 8%, transparent);
+  padding: 1.35rem;
+  box-shadow: 0 16px 35px rgba(31, 38, 64, 0.08);
+  display: grid;
+  gap: 0.5rem;
+}
+
+.step h3 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.step p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.why-generator {
+  display: grid;
+  gap: 0.5rem;
+  max-width: 70ch;
+}
+
+.why-generator h3 {
+  margin: 0;
+}
+
