@@ -10,7 +10,8 @@
 
   <meta name="referrer" content="no-referrer">
   <meta property="og:title" content="Random & Secure Password Generator">
-<meta property="og:description" content="Free random password generator to create secure, strong passwords instantly. No data stored—everything runs locally in your browser for maximum privacy.">
+  <meta property="og:description"
+    content="Free random password generator to create secure, strong passwords instantly. No data stored—everything runs locally in your browser for maximum privacy.">
 
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://secure-password-generator.com/">
@@ -29,7 +30,49 @@
       "description": "A simple and secure random password generator that never stores your passwords.",
       "browserRequirements": "Requires JavaScript"
     }
-    </script>
+  </script>
+
+  <!-- FAQ schema for rich results -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Is this random password generator safe?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. All password generation happens in your browser using the Web Crypto API (crypto.getRandomValues). Your passwords never leave your device and are never sent to any server, so this secure password generator keeps everything local and private."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long should my password be?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "For important accounts, aim for at least 16 characters. Longer passwords (20+ characters) provide even stronger protection. This random password generator supports lengths up to 128 characters, so you can create very strong credentials for sensitive accounts."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why should every site have its own password?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Reusing passwords means a single breach can unlock multiple accounts. Using a unique, randomly generated password for every site helps protect you from credential stuffing attacks and prevents one leaked password from compromising other services."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I store all these random passwords?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Instead of memorizing every password, use a reputable password manager to store and autofill them. A password manager encrypts your vault and makes it easy to use long, random passwords across devices without needing to remember each one."
+          }
+        }
+      ]
+    }
+  </script>
 
   <!-- Valid placement for noscript <style> -->
   <noscript>
@@ -62,8 +105,7 @@
 
   <header class="site-header">
     <div class="container">
-      <h1>Random & Secure Password Generator
-      </h1>
+      <h1>Random &amp; Secure Password Generator</h1>
       <p class="tagline">Generated locally in your browser. Never stored or transmitted.</p>
     </div>
   </header>
@@ -177,6 +219,48 @@
         <h3>Why use a random password generator?</h3>
         <p>Unique, unpredictable passwords protect your accounts from credential stuffing and brute-force attacks. A secure password generator makes it effortless to avoid reused or guessable credentials.</p>
         <p>Pair these strong passwords with a reputable password manager to store them safely and autofill across devices without memorizing every login.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="faq-section">
+    <div class="container">
+      <h2>Frequently asked questions</h2>
+
+      <div class="faq-item">
+        <h3>Is this random password generator safe?</h3>
+        <p>
+          Yes. All password generation happens in your browser using the Web Crypto API
+          (<code>crypto.getRandomValues</code>). Your passwords never leave your device and are never sent to any
+          server, so this secure password generator keeps everything local and private.
+        </p>
+      </div>
+
+      <div class="faq-item">
+        <h3>How long should my password be?</h3>
+        <p>
+          For important accounts, aim for at least 16 characters. Longer passwords (20+ characters) provide even
+          stronger protection. This random password generator supports lengths up to 128 characters, so you can create
+          very strong credentials for sensitive accounts.
+        </p>
+      </div>
+
+      <div class="faq-item">
+        <h3>Why should every site have its own password?</h3>
+        <p>
+          Reusing passwords means a single breach can unlock multiple accounts. Using a unique, randomly generated
+          password for every site helps protect you from credential stuffing attacks and prevents one leaked password
+          from compromising other services.
+        </p>
+      </div>
+
+      <div class="faq-item">
+        <h3>How do I store all these random passwords?</h3>
+        <p>
+          Instead of memorizing every password, use a reputable password manager to store and autofill them. A password
+          manager encrypts your vault and makes it easy to use long, random passwords across devices without needing to
+          remember each one.
+        </p>
       </div>
     </div>
   </section>
