@@ -92,6 +92,29 @@
     gtag('config', 'G-4TCEFRK1FQ');
   </script>
 
+  <!-- Self-exclusion for owner traffic -->
+  <script>
+    (function() {
+      // Check if user wants to exclude themselves
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.get('exclude') === 'me') {
+        // Set exclusion cookie that lasts 10 years
+        document.cookie = '_ga_disable_G-4TCEFRK1FQ=true; expires=Thu, 31 Dec 2099 23:59:59 UTC; path=/; SameSite=Lax';
+        // Also disable immediately for this session
+        window['ga-disable-G-4TCEFRK1FQ'] = true;
+        // Show confirmation
+        alert('Analytics disabled! Your visits will no longer be tracked.');
+        // Remove the parameter from URL to clean it up
+        window.history.replaceState({}, document.title, window.location.pathname);
+      }
+      
+      // Check if exclusion cookie exists and disable tracking
+      if (document.cookie.indexOf('_ga_disable_G-4TCEFRK1FQ=true') > -1) {
+        window['ga-disable-G-4TCEFRK1FQ'] = true;
+      }
+    })();
+  </script>
+
 </head>
 
 <body>
@@ -201,24 +224,29 @@
       <div class="steps" aria-label="Steps for generating a password">
         <article class="step">
           <h3>1. Choose your settings</h3>
-          <p>Select your password length between 16 and 128 characters and decide whether to include lowercase, uppercase, numbers, and symbols.</p>
+          <p>Select your password length between 16 and 128 characters and decide whether to include lowercase,
+            uppercase, numbers, and symbols.</p>
         </article>
 
         <article class="step">
           <h3>2. Generate instantly in your browser</h3>
-          <p>Tap Generate to create a strong password using the Web Crypto API (<code>crypto.getRandomValues</code>). This secure password generator runs entirely on your device, keeping everything local and private.</p>
+          <p>Tap Generate to create a strong password using the Web Crypto API (<code>crypto.getRandomValues</code>).
+            This secure password generator runs entirely on your device, keeping everything local and private.</p>
         </article>
 
         <article class="step">
           <h3>3. Copy and use your new password</h3>
-          <p>Copy the result with one click and use it for email, banking, social media, or work accounts. The free random password generator never sends or stores what you create.</p>
+          <p>Copy the result with one click and use it for email, banking, social media, or work accounts. The free
+            random password generator never sends or stores what you create.</p>
         </article>
       </div>
 
       <div class="why-generator">
         <h3>Why use a random password generator?</h3>
-        <p>Unique, unpredictable passwords protect your accounts from credential stuffing and brute-force attacks. A secure password generator makes it effortless to avoid reused or guessable credentials.</p>
-        <p>Pair these strong passwords with a reputable password manager to store them safely and autofill across devices without memorizing every login.</p>
+        <p>Unique, unpredictable passwords protect your accounts from credential stuffing and brute-force attacks. A
+          secure password generator makes it effortless to avoid reused or guessable credentials.</p>
+        <p>Pair these strong passwords with a reputable password manager to store them safely and autofill across
+          devices without memorizing every login.</p>
       </div>
     </div>
   </section>
