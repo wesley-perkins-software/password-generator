@@ -31,13 +31,32 @@ body {
 
 /* Fallback borders for older browsers (before color-mix rules) */
 .generator { border: 1px solid rgba(76,110,245,0.10); }
-.site-header, .site-footer { border-bottom: 1px solid rgba(76,110,245,0.12); }
+.site-nav, .site-header, .site-footer { border-bottom: 1px solid rgba(76,110,245,0.12); }
 .site-footer { border-top: 1px solid rgba(76,110,245,0.12); }
 
+.site-nav,
 .site-header, .site-footer {
   background: color-mix(in srgb, var(--surface) 90%, transparent);
   backdrop-filter: blur(8px);
   border-bottom: 1px solid color-mix(in srgb, var(--accent) 12%, transparent);
+}
+
+.site-nav .container {
+  padding-top: 0.85rem;
+  padding-bottom: 0.85rem;
+}
+
+.site-logo {
+  text-decoration: none;
+  color: var(--fg);
+  font-weight: 600;
+  font-size: 1.05rem;
+  line-height: 1.2;
+}
+
+.site-logo:hover,
+.site-logo:focus-visible {
+  text-decoration: underline;
 }
 
 .site-footer {
