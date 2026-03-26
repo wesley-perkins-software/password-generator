@@ -1,26 +1,120 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Secure Password Generator | Create Strong Passwords Instantly</title>
-  <meta name="description" content="Generate strong, random passwords instantly in your browser using a secure client-side generator with zero logging.">
+  <title>Random & Secure Password Generator | Create Strong Passwords</title>
+  <meta name="description"
+    content="Free random password generator to create secure, strong passwords instantly. No data stored—everything runs locally in your browser for maximum privacy.">
+
   <meta name="referrer" content="no-referrer">
-  <meta property="og:title" content="Secure Password Generator">
-  <meta property="og:description" content="Create strong passwords instantly without sending data anywhere.">
+  <meta property="og:title" content="Random & Secure Password Generator">
+  <meta property="og:description"
+    content="Free random password generator to create secure, strong passwords instantly. No data stored—everything runs locally in your browser for maximum privacy.">
+
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://example.com/">
-  <link rel="canonical" href="https://example.com/">
+  <meta property="og:url" content="https://secure-password-generator.com/">
+  <link rel="canonical" href="https://secure-password-generator.com/">
   <link rel="stylesheet" href="styles.css">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Secure Password Generator",
+      "url": "https://secure-password-generator.com",
+      "applicationCategory": "SecurityApplication",
+      "operatingSystem": "All",
+      "description": "A simple and secure random password generator that never stores your passwords.",
+      "browserRequirements": "Requires JavaScript"
+    }
+  </script>
+
+  <!-- FAQ schema for rich results -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Is this random password generator safe?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. All password generation happens in your browser using the Web Crypto API (crypto.getRandomValues). Your passwords never leave your device and are never sent to any server, so this secure password generator keeps everything local and private."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long should my password be?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "For important accounts, aim for at least 16 characters. Longer passwords (20+ characters) provide even stronger protection. This random password generator supports lengths up to 128 characters, so you can create very strong credentials for sensitive accounts."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why should every site have its own password?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Reusing passwords means a single breach can unlock multiple accounts. Using a unique, randomly generated password for every site helps protect you from credential stuffing attacks and prevents one leaked password from compromising other services."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I store all these random passwords?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Instead of memorizing every password, use a reputable password manager to store and autofill them. A password manager encrypts your vault and makes it easy to use long, random passwords across devices without needing to remember each one."
+          }
+        }
+      ]
+    }
+  </script>
 
   <!-- Valid placement for noscript <style> -->
   <noscript>
     <style>
-      .generator { display: none; }
+      .generator {
+        display: none;
+      }
     </style>
   </noscript>
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4TCEFRK1FQ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-4TCEFRK1FQ');
+  </script>
+
+  <!-- Self-exclusion for owner traffic -->
+  <script>
+    (function() {
+      // Check if user wants to exclude themselves
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.get('exclude') === 'me') {
+        // Set exclusion cookie that lasts 10 years
+        document.cookie = '_ga_disable_G-4TCEFRK1FQ=true; expires=Thu, 31 Dec 2099 23:59:59 UTC; path=/; SameSite=Lax';
+        // Also disable immediately for this session
+        window['ga-disable-G-4TCEFRK1FQ'] = true;
+        // Show confirmation
+        alert('Analytics disabled! Your visits will no longer be tracked.');
+        // Remove the parameter from URL to clean it up
+        window.history.replaceState({}, document.title, window.location.pathname);
+      }
+      
+      // Check if exclusion cookie exists and disable tracking
+      if (document.cookie.indexOf('_ga_disable_G-4TCEFRK1FQ=true') > -1) {
+        window['ga-disable-G-4TCEFRK1FQ'] = true;
+      }
+    })();
+  </script>
+
 </head>
 
 <body>
@@ -34,7 +128,7 @@
 
   <header class="site-header">
     <div class="container">
-      <h1>Secure Password Generator</h1>
+      <h1>Random &amp; Secure Password Generator</h1>
       <p class="tagline">Generated locally in your browser. Never stored or transmitted.</p>
     </div>
   </header>
@@ -46,24 +140,11 @@
       <form id="generator-form" novalidate>
         <div class="field">
           <label for="length">Password length</label>
-          <input
-            type="number"
-            id="length"
-            name="length"
-            min="16"
-            max="128"
-            value="20"
-            inputmode="numeric"
+          <input type="number" id="length" name="length" min="16" max="128" value="20" inputmode="numeric"
             autocomplete="off">
-          
+
           <label class="visually-hidden" for="length-slider">Password length slider</label>
-          <input
-            type="range"
-            id="length-slider"
-            name="length-slider"
-            min="16"
-            max="128"
-            value="20">
+          <input type="range" id="length-slider" name="length-slider" min="16" max="128" value="20">
         </div>
 
         <fieldset class="field options">
@@ -136,15 +217,91 @@
     </aside>
   </main>
 
+  <section class="how-it-works" aria-labelledby="how-it-works-title">
+    <div class="container">
+      <h2 id="how-it-works-title">How this random password generator works</h2>
+
+      <div class="steps" aria-label="Steps for generating a password">
+        <article class="step">
+          <h3>1. Choose your settings</h3>
+          <p>Select your password length between 16 and 128 characters and decide whether to include lowercase,
+            uppercase, numbers, and symbols.</p>
+        </article>
+
+        <article class="step">
+          <h3>2. Generate instantly in your browser</h3>
+          <p>Tap Generate to create a strong password using the Web Crypto API (<code>crypto.getRandomValues</code>).
+            This secure password generator runs entirely on your device, keeping everything local and private.</p>
+        </article>
+
+        <article class="step">
+          <h3>3. Copy and use your new password</h3>
+          <p>Copy the result with one click and use it for email, banking, social media, or work accounts. The free
+            random password generator never sends or stores what you create.</p>
+        </article>
+      </div>
+
+      <div class="why-generator">
+        <h3>Why use a random password generator?</h3>
+        <p>Unique, unpredictable passwords protect your accounts from credential stuffing and brute-force attacks. A
+          secure password generator makes it effortless to avoid reused or guessable credentials.</p>
+        <p>Pair these strong passwords with a reputable password manager to store them safely and autofill across
+          devices without memorizing every login.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="faq-section">
+    <div class="container">
+      <h2>Frequently asked questions</h2>
+
+      <div class="faq-item">
+        <h3>Is this random password generator safe?</h3>
+        <p>
+          Yes. All password generation happens in your browser using the Web Crypto API
+          (<code>crypto.getRandomValues</code>). Your passwords never leave your device and are never sent to any
+          server, so this secure password generator keeps everything local and private.
+        </p>
+      </div>
+
+      <div class="faq-item">
+        <h3>How long should my password be?</h3>
+        <p>
+          For important accounts, aim for at least 16 characters. Longer passwords (20+ characters) provide even
+          stronger protection. This random password generator supports lengths up to 128 characters, so you can create
+          very strong credentials for sensitive accounts.
+        </p>
+      </div>
+
+      <div class="faq-item">
+        <h3>Why should every site have its own password?</h3>
+        <p>
+          Reusing passwords means a single breach can unlock multiple accounts. Using a unique, randomly generated
+          password for every site helps protect you from credential stuffing attacks and prevents one leaked password
+          from compromising other services.
+        </p>
+      </div>
+
+      <div class="faq-item">
+        <h3>How do I store all these random passwords?</h3>
+        <p>
+          Instead of memorizing every password, use a reputable password manager to store and autofill them. A password
+          manager encrypts your vault and makes it easy to use long, random passwords across devices without needing to
+          remember each one.
+        </p>
+      </div>
+    </div>
+  </section>
+
   <footer class="site-footer">
     <div class="container">
       <p>Passwords are generated locally using the Web Crypto API. Remember to store them securely.</p>
 
       <nav aria-label="Legal">
         <ul class="footer-links">
-          <li><a href="/privacy.html">Privacy Notice</a></li>
-          <li><a href="/terms.html">Terms of Service</a></li>
-          <li><a href="#" data-cmp-link>Privacy &amp; cookie settings</a></li>
+          <li><a href="/privacy">Privacy Policy</a></li>
+          <li><a href="/terms">Terms of Service</a></li>
+          <li><a href="/cookies">Cookie &amp; privacy settings</a></li>
         </ul>
       </nav>
     </div>
@@ -152,4 +309,5 @@
 
   <script src="script.js" defer></script>
 </body>
+
 </html>

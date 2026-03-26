@@ -1,5 +1,5 @@
 :root {
-  color-scheme: light dark;
+  color-scheme: light;
   --bg: #f6f3ec;
   --bg-highlight: #eef2ff;
   --surface: #ffffff;
@@ -93,6 +93,8 @@ main.container {
   box-shadow: 0 18px 45px rgba(31, 38, 64, 0.12);
   border: 1px solid color-mix(in srgb, var(--accent) 10%, transparent);
 }
+
+.generator { padding-top: 0.25rem; }
 
 .field {
   display: grid;
@@ -265,25 +267,82 @@ output#password {
   color: var(--fg);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #0f172a;
-    --bg-highlight: #10142d;
-    --surface: rgba(15, 23, 42, 0.78);
-    --fg: #e2e8f0;
-    --accent: #8da2ff;
-    --accent-soft: rgba(141, 162, 255, 0.35);
-    --accent-contrast: #040712;
-    --muted: #94a3b8;
-  }
+.how-it-works {
+  background: color-mix(in srgb, var(--surface) 85%, transparent);
+  border-top: 1px solid color-mix(in srgb, var(--accent) 10%, transparent);
+}
 
-  .site-header,
-  .site-footer {
-    border-color: rgba(141, 162, 255, 0.25);
-  }
+.how-it-works h2 {
+  margin: 0 0 1rem;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+}
 
-  .output {
-    background: rgba(4, 7, 18, 0.9);
-    color: #f8faff;
-  }
+.steps {
+  display: grid;
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+@media (min-width: 720px) {
+  .steps { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+.step {
+  background: var(--surface);
+  border-radius: 1rem;
+  border: 1px solid color-mix(in srgb, var(--accent) 8%, transparent);
+  padding: 1.35rem;
+  box-shadow: 0 16px 35px rgba(31, 38, 64, 0.08);
+  display: grid;
+  gap: 0.5rem;
+}
+
+.step h3 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.step p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.why-generator {
+  display: grid;
+  gap: 0.5rem;
+  max-width: 70ch;
+}
+
+.why-generator h3 {
+  margin: 0;
+}
+
+/* FAQ section styling */
+
+.faq-section {
+  padding-bottom: 2.5rem;
+}
+
+.faq-section h2 {
+  margin: 0 0 1rem;
+  font-size: clamp(1.4rem, 3vw, 1.8rem);
+}
+
+.faq-item {
+  background: var(--surface);
+  border-radius: 1rem;
+  border: 1px solid color-mix(in srgb, var(--accent) 8%, transparent);
+  padding: 1.35rem;
+  box-shadow: 0 16px 35px rgba(31, 38, 64, 0.06);
+  margin-bottom: 1rem;
+}
+
+.faq-item h3 {
+  margin: 0 0 0.35rem;
+  font-size: 1.05rem;
+}
+
+.faq-item p {
+  margin: 0;
+  color: var(--muted);
 }

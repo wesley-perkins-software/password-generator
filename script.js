@@ -9,6 +9,14 @@
   const copyButton = document.getElementById("copy");
   const passwordOutput = document.getElementById("password");
   const status = document.getElementById("status");
+
+  // Analytics tracking function
+  function trackEvent(eventName, eventParams = {}) {
+    if (typeof gtag !== 'undefined') {
+      gtag('event', eventName, eventParams);
+    }
+  }
+
   function hasSecureRandomSupport() {
     if (!window.crypto?.getRandomValues) {
       return false;
@@ -123,6 +131,15 @@
     passwordOutput.dataset.value = password;
     copyButton.disabled = false;
     status.textContent = "Password generated. Use Copy to store it securely.";
+
+    // Track password generation event
+    trackEvent('generate_password', {
+      'password_length': length,
+      'has_uppercase': uppercaseToggle.checked,
+      'has_lowercase': lowercaseToggle.checked,
+      'has_numbers': numbersToggle.checked,
+      'has_symbols': symbolsToggle.checked
+    });
   }
 
   async function copyPassword() {
@@ -135,6 +152,9 @@
     try {
       await navigator.clipboard.writeText(value);
       status.textContent = "Password copied to clipboard.";
+      
+      // Track copy event
+      trackEvent('copy_password');
     } catch (error) {
       status.textContent = "Clipboard unavailable. Copy manually.";
     }
