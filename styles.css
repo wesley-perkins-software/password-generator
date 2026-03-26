@@ -413,3 +413,56 @@ output#password {
   color: var(--muted);
   max-width: 74ch;
 }
+
+.learn-more {
+  padding-bottom: 2.5rem;
+}
+
+.learn-more h2 {
+  margin: 0 0 1rem;
+  font-size: clamp(1.35rem, 3vw, 1.8rem);
+}
+
+.learn-more ul,
+.related-resources ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.9rem;
+}
+
+.learn-more li,
+.related-resources li {
+  background: var(--surface);
+  border-radius: 1rem;
+  border: 1px solid color-mix(in srgb, var(--accent) 8%, transparent);
+  padding: 1rem 1.1rem;
+}
+
+.learn-more a,
+.related-resources a {
+  color: var(--accent);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.learn-more a:hover,
+.learn-more a:focus-visible,
+.related-resources a:hover,
+.related-resources a:focus-visible {
+  text-decoration: underline;
+}
+
+.learn-more p {
+  margin: 0.35rem 0 0;
+  color: var(--muted);
+}
+
+.related-resources {
+  margin-top: 0.4rem;
+}
+
+.related-resources h2 {
+  margin-bottom: 0.7rem;
+}
