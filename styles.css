@@ -31,13 +31,32 @@ body {
 
 /* Fallback borders for older browsers (before color-mix rules) */
 .generator { border: 1px solid rgba(76,110,245,0.10); }
-.site-header, .site-footer { border-bottom: 1px solid rgba(76,110,245,0.12); }
+.site-nav, .site-header, .site-footer { border-bottom: 1px solid rgba(76,110,245,0.12); }
 .site-footer { border-top: 1px solid rgba(76,110,245,0.12); }
 
+.site-nav,
 .site-header, .site-footer {
   background: color-mix(in srgb, var(--surface) 90%, transparent);
   backdrop-filter: blur(8px);
   border-bottom: 1px solid color-mix(in srgb, var(--accent) 12%, transparent);
+}
+
+.site-nav .container {
+  padding-top: 0.85rem;
+  padding-bottom: 0.85rem;
+}
+
+.site-logo {
+  text-decoration: none;
+  color: var(--fg);
+  font-weight: 600;
+  font-size: 1.05rem;
+  line-height: 1.2;
+}
+
+.site-logo:hover,
+.site-logo:focus-visible {
+  text-decoration: underline;
 }
 
 .site-footer {
@@ -345,4 +364,124 @@ output#password {
 .faq-item p {
   margin: 0;
   color: var(--muted);
+}
+
+.why-passwords-matter {
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+  border-top: 1px solid color-mix(in srgb, var(--accent) 10%, transparent);
+}
+
+.why-passwords-matter h2 {
+  margin: 0 0 0.85rem;
+  font-size: clamp(1.4rem, 3vw, 1.9rem);
+}
+
+.why-passwords-matter p {
+  margin: 0 0 1rem;
+  max-width: 72ch;
+  color: var(--muted);
+}
+
+.section-link {
+  margin-top: 0.25rem;
+}
+
+.section-link a,
+.content-card a {
+  color: var(--accent);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.section-link a:hover,
+.section-link a:focus-visible,
+.content-card a:hover,
+.content-card a:focus-visible {
+  text-decoration: underline;
+}
+
+.content-page {
+  padding-bottom: 2rem;
+}
+
+.content-card {
+  background: var(--surface);
+  border-radius: 1.25rem;
+  border: 1px solid color-mix(in srgb, var(--accent) 8%, transparent);
+  box-shadow: 0 16px 35px rgba(31, 38, 64, 0.08);
+  padding: clamp(1.35rem, 3vw, 2rem);
+  display: grid;
+  gap: 1.1rem;
+}
+
+.content-card h1,
+.content-card h2,
+.content-card p {
+  margin: 0;
+}
+
+.content-card h1 {
+  font-size: clamp(1.6rem, 4vw, 2.2rem);
+}
+
+.content-card h2 {
+  font-size: 1.15rem;
+}
+
+.content-card p {
+  color: var(--muted);
+  max-width: 74ch;
+}
+
+.learn-more {
+  padding-bottom: 2.5rem;
+}
+
+.learn-more h2 {
+  margin: 0 0 1rem;
+  font-size: clamp(1.35rem, 3vw, 1.8rem);
+}
+
+.learn-more ul,
+.related-resources ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.9rem;
+}
+
+.learn-more li,
+.related-resources li {
+  background: var(--surface);
+  border-radius: 1rem;
+  border: 1px solid color-mix(in srgb, var(--accent) 8%, transparent);
+  padding: 1rem 1.1rem;
+}
+
+.learn-more a,
+.related-resources a {
+  color: var(--accent);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.learn-more a:hover,
+.learn-more a:focus-visible,
+.related-resources a:hover,
+.related-resources a:focus-visible {
+  text-decoration: underline;
+}
+
+.learn-more p {
+  margin: 0.35rem 0 0;
+  color: var(--muted);
+}
+
+.related-resources {
+  margin-top: 0.4rem;
+}
+
+.related-resources h2 {
+  margin-bottom: 0.7rem;
 }
