@@ -443,7 +443,8 @@ output#password {
 }
 
 .learn-more ul,
-.related-resources ul {
+.related-resources ul,
+.related-resources .resource-links {
   list-style: none;
   margin: 0;
   padding: 0;
@@ -452,7 +453,8 @@ output#password {
 }
 
 .learn-more li,
-.related-resources li {
+.related-resources li,
+.related-resources .resource-links > a {
   background: var(--surface);
   border-radius: 1rem;
   border: 1px solid color-mix(in srgb, var(--accent) 8%, transparent);
@@ -464,6 +466,10 @@ output#password {
   color: var(--accent);
   font-weight: 600;
   text-decoration: none;
+}
+
+.related-resources .resource-links > a {
+  display: block;
 }
 
 .learn-more a:hover,
